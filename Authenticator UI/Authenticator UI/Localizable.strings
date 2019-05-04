@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Authenticator UI
+
+  Created by Ben Leggiero on 5/4/19.
+  Copyright © 2019 Ben Leggiero. All rights reserved.
+*/
+
+
+
+// The text shown on the button which the user presses when they want to sign in with an existing account
+"button.authentication.signIn" = "Sign In";
+
+// The text shown on the button which the user presses when they want to register a new account
+"button.authentication.register" = "Register";

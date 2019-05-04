@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  Authenticator Guts
+
+  Created by Ben Leggiero on 5/4/19.
+  Copyright © 2019 Ben Leggiero. All rights reserved.
+*/
+
+
+
+// The text shown next to a password strength meter when the password has already been used somwhere else
+"passwordStrength.bad.alreadyUsedElsewhere" = "Already used somewhere else";
+
+// The text shown next to a password strength meter when the password is not long enough
+"passwordStrength.bad.tooShort" = "Too short";
+
+// The text shown next to a password strength meter when the password meets the minumum requirements
+"passwordStrength.acceptable" = "Acceptable";
+
+// The text shown next to a password strength meter when the password meets/esceeds the reccomendations
+"passwordStrength.veryGood" = "Very good";
+
+// The text shown next to a password strength meter when the password is exceptionally good and should always be accepted
+"passwordStrength.exceptional" = "Exceptional";
