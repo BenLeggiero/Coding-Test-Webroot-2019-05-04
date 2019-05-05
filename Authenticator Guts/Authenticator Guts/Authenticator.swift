@@ -16,7 +16,7 @@ public class Authenticator {
     /// The database wherein users are registered
     let registryDatabase: UserRegistryDatabase
     
-    init(registryDatabase: UserRegistryDatabase) {
+    public init(registryDatabase: UserRegistryDatabase) {
         self.registryDatabase = registryDatabase
     }
 }
@@ -34,7 +34,7 @@ public extension Authenticator {
     ///   - password: The new user's password
     ///   - callback: Called once the registration process is complete, whether or not that was a success
     func registerNewUser(username: String, password: String, callback: @escaping RegistrationCallback) {
-        registryDatabase.insertNewUser(username: username, password: password) { result in
+        registryDatabase.insertNewUser(username: username, actualUserPassword: password) { result in
             switch result {
             case .userSuccessfullyInserted(let registeredUser):
                 return callback(.registeredSuccessfully(authenticatedUser: AuthenticatedUser(registeredUser)))
@@ -78,15 +78,15 @@ public extension Authenticator {
     /// Begins the authentication process for the given user
     ///
     /// - Parameters:
-    ///   - username: The username which the user has provided to us
-    ///   - password: The password which the user has provided to us
-    ///   - callback: Called once authentication is completed
-    func authenticate(username: String, password: String, callback: @escaping AuthenticationCallback) {
+    ///   - username:           The username which the user has provided to us
+    ///   - actualUserPassword: The password which the user has provided to us
+    ///   - callback:           Called once authentication is completed
+    func authenticate(username: String, actualUserPassword: String, callback: @escaping AuthenticationCallback) { // Note: I noticed that this should instead involve a callback providing the salt, which is then returned a `Password`, instead of just passing in the password. I didn't have time to implement that during the coding test
         
         /// Encapsualtes the logic perfomed after the user was definitely found in the registry database
         ///
         /// - Parameter registeredUser: The user which we found was registered
-        func userFound(_ registeredUser: RegisteredUser) {
+        func userFound(_ registeredUser: RegisteredUserWithinDatabase) {
             
             /// Encapsulates the logic for handling a broken MFA mechanism.
             ///
@@ -98,10 +98,18 @@ public extension Authenticator {
                     case .successfullyUpdatedUser:
                         return startAuthentication()
                         
+                    case .userNotFound:
+                        callback(.userNotFound)
+                        
                     case .unknownFailure:
                         return callback(.unexpectedFailure)
                     }
                 }
+            }
+            
+            
+            guard registeredUser.password.isEqual(toActualUserPassword: actualUserPassword, salt: registeredUser.passwordSalt) else {
+                return callback(.badPassword)
             }
             
             
@@ -138,7 +146,7 @@ public extension Authenticator {
                     userFound(registeredUser)
                     
                 case .userNotFound:
-                    return callback(.noSuchUserFound)
+                    return callback(.userNotFound)
                 }
             }
         }
@@ -160,8 +168,11 @@ public extension Authenticator {
         /// - Parameter authenticatedUser: The user who was just successfully authenticated
         case authenticatedSuccessfully(authenticatedUser: AuthenticatedUser)
         
+        /// The user provided an incorrect password
+        case badPassword
+        
         /// The user was not found in the system
-        case noSuchUserFound
+        case userNotFound
         
         /// The user has been removed from the system and thus cannot log in
         case userWasRemoved

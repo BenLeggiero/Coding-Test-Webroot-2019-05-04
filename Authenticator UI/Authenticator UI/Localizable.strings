@@ -50,6 +50,9 @@
 // The text we display to the user alongside other controls, when they tried to sign in after deleting their account
 "message.inlineAlert.accountDeleted" = "Your account was deleted";
 
+// The text we display to the user alongside other controls, when they tried to register by using a weak password
+"message.inlineAlert.passwordTooWeak" = "That password is not strong enough";
+
 // The text we display to the user alongside other controls, when they tried to sign in using an incorrect password
 "message.inlineAlert.badPassword" = "That password is incorrect";
 

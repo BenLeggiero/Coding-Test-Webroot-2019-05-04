@@ -15,16 +15,17 @@ public extension Array where
     Element: SignedNumeric
 {
     
-    /// Finds the value in this array which is closest to the given one
+    /// Finds the value in this array which is closest to the given one.
+    /// In the event of a tie, the smaller value is chosen.
+    ///
+    /// - Note: There is no defined behavior when using special values, like `Double.infinity` or `Double.nan`
     ///
     /// - Parameter other: The value you which is close to one in this array
     /// - Returns: The closest element in this array, or `nil` if it is an empty array
     func closest(to other: Element) -> Element? {
         let sorted = self.sorted()
         return sorted
-            .enumerated()
-            .min(by: { abs($0.1 - other) < abs($1.1 - other) })?
-            .element
+            .min(by: { abs($0 - other) < abs($1 - other) })
             ?? sorted.last
     }
 }

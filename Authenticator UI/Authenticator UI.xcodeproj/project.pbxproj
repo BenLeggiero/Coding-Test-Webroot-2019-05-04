@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A34E8595227E8D010020AB3A /* MockUserRegistryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34E8594227E8D010020AB3A /* MockUserRegistryDatabase.swift */; };
 		A3A3E15F227E3686003689D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E15E227E3686003689D2 /* AppDelegate.swift */; };
 		A3A3E161227E3686003689D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E160227E3686003689D2 /* Assets.xcassets */; };
 		A3A3E164227E3686003689D2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E162227E3686003689D2 /* MainMenu.xib */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A34E8594227E8D010020AB3A /* MockUserRegistryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRegistryDatabase.swift; sourceTree = "<group>"; };
 		A3A3E15B227E3686003689D2 /* Authenticator UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Authenticator UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A3E15E227E3686003689D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3A3E160227E3686003689D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A34E8591227E8CD30020AB3A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A34E8594227E8D010020AB3A /* MockUserRegistryDatabase.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		A3A3E152227E3686003689D2 = {
 			isa = PBXGroup;
 			children = (
@@ -112,8 +122,9 @@
 		A3A3E15D227E3686003689D2 /* Authenticator UI */ = {
 			isa = PBXGroup;
 			children = (
-				A3A3E18D227E4407003689D2 /* Utilities */,
 				A3A3E15E227E3686003689D2 /* AppDelegate.swift */,
+				A34E8591227E8CD30020AB3A /* Mocks */,
+				A3A3E18D227E4407003689D2 /* Utilities */,
 				A3A3E19D227E4EA5003689D2 /* UI */,
 				A3A3E19E227E4EBE003689D2 /* Resources */,
 			);
@@ -311,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3A3E19B227E4E9E003689D2 /* SignInViewController.swift in Sources */,
+				A34E8595227E8D010020AB3A /* MockUserRegistryDatabase.swift in Sources */,
 				A3A3E193227E4700003689D2 /* DescribableByVagueValue.swift in Sources */,
 				A3A3E15F227E3686003689D2 /* AppDelegate.swift in Sources */,
 				A3A3E1A7227E57BA003689D2 /* Shaky UI.swift in Sources */,

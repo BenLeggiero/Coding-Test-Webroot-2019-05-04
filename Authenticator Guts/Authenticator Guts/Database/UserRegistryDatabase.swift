@@ -19,7 +19,7 @@ public protocol UserRegistryDatabase {
     ///   - username: The new user's username
     ///   - password: The new user's password
     ///   - callback: Called after the attempt has completed
-    func insertNewUser(username: String, password: String, callback: @escaping InsertNewUserCallback)
+    func insertNewUser(username: String, actualUserPassword: String, callback: @escaping InsertNewUserCallback)
     
     
     /// Attempts to find an existing user in the database
@@ -35,7 +35,7 @@ public protocol UserRegistryDatabase {
     /// - Parameters:
     ///   - userUpdate: The model for the update to be perfomed
     ///   - callback:   Called when the update attempt is complete
-    func updateExistingUser(_ userUpdate: RegisteredUser.Update, callback: @escaping UserUpdateCallback)
+    func updateExistingUser(_ userUpdate: RegisteredUserWithinDatabase.Update, callback: @escaping UserUpdateCallback)
 }
 
 
@@ -57,7 +57,7 @@ public extension UserRegistryDatabase {
 public enum UserRegistryDatabaseInsertNewUserResult {
     /// The user was successfully inserted
     /// - Parameter registeredUser: The model of the user who has newly been registered
-    case userSuccessfullyInserted(registeredUser: RegisteredUser)
+    case userSuccessfullyInserted(registeredUser: RegisteredUserWithinDatabase)
     
     /// The user could not be inserted now because that user has already been inserted in the past. Perhaps you meant
     /// to update the user instead?
@@ -86,7 +86,7 @@ public extension UserRegistryDatabase {
 public enum UserRegistryDatabaseIsUserRegisteredResult {
     /// The user has already been registered
     /// - Parameter registeredUser: The model of the user who has already been registered
-    case userAlreadyRegistered(registeredUser: RegisteredUser)
+    case userAlreadyRegistered(registeredUser: RegisteredUserWithinDatabase)
     
     /// The user was not found in the registry
     case userNotFound
@@ -112,6 +112,9 @@ public enum UserRegistryDatabaseUserUpdateResult {
     
     /// The user was successfuly updated in the registry database
     case successfullyUpdatedUser
+    
+    /// Could not find any user to update
+    case userNotFound
     
     /// For some unknown reason, the user could not be updated
     case unknownFailure

@@ -85,7 +85,7 @@ private extension SignInViewController {
             let passwordAcceptability = performBasicPasswordChecks()
             switch passwordAcceptability {
             case .badPassword:
-                alertUser(of: .badPassword)
+                alertUser(of: .passwordNotGoodEnough)
                 shakeWindow()
                 
             case .passwordsDoNotMatch:
@@ -124,7 +124,13 @@ private extension SignInViewController {
     
     
     var isNewUser: Bool {
-        return newUserCheckBox.state == .on
+        get {
+            return newUserCheckBox.state == .on
+        }
+        set {
+            newUserCheckBox.state = newValue ? .on : .off
+            updateUiApproach(isNewUser: newValue)
+        }
     }
     
     
@@ -289,7 +295,10 @@ private extension SignInViewController {
         case .accountDeleted:
             alertUserUsingInlineText("message.inlineAlert.accountDeleted".localized(comment: "Your account was deleted"))
             
-        case .badPassword:
+        case .passwordNotGoodEnough:
+            alertUserUsingInlineText("message.inlineAlert.passwordTooWeak".localized(comment: "That password is not strong enough"))
+            
+        case .incorrectPassword:
             alertUserUsingInlineText("message.inlineAlert.badPassword".localized(comment: "That password is incorrect"))
             
         case .passwordMismatch:
@@ -316,6 +325,7 @@ private extension SignInViewController {
     
     private func alertUserUsingInlineText(_ newAlertText: String) {
         inlineTextAlertText = newAlertText
+        shakeWindow()
     }
     
     
@@ -324,9 +334,6 @@ private extension SignInViewController {
             inlineAlertLabel.stringValue = inlineTextAlertText
             inlineAlertIcon.isHidden = false
             inlineAlertLabel.isHidden = false
-            
-            inlineAlertLabel.shake()
-            inlineAlertIcon.shake()
         }
         else {
             inlineAlertIcon.isHidden = true
@@ -341,8 +348,11 @@ private extension SignInViewController {
         /// Tell the user that they couldn't be authenticated due to some system problem
         case badAuthenticator
         
+        /// Tell the user that their password needs to be better
+        case passwordNotGoodEnough
+        
         /// Tell the user that they gave us the wrong password
-        case badPassword
+        case incorrectPassword
         
         /// Tell the user that their repeated passwords aren't the same
         case passwordMismatch
@@ -375,13 +385,17 @@ private extension SignInViewController {
     
     func performSignIn() {
         withAuthenticator { authenticator in
-            authenticator.authenticate(username: username, password: password) { [weak self] authenticationResult in
+            authenticator.authenticate(username: username, actualUserPassword: password) { [weak self] authenticationResult in
                 switch authenticationResult {
                 case .authenticatedSuccessfully(let authenticatedUser):
                     self?.onUserDidSignInSuccessfully?(authenticatedUser)
                     
-                case .noSuchUserFound:
+                case .badPassword:
+                    self?.alertUser(of: .incorrectPassword)
+                    
+                case .userNotFound:
                     self?.alertUser(of: .noSuchUserFound)
+                    self?.isNewUser = true
                     
                 case .userWasRemoved:
                     self?.alertUser(of: .accountDeleted)

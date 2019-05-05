@@ -24,8 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return signInViewController
     }()
     
+    private lazy var mockAuthenticator = Authenticator(registryDatabase: MockUserRegistryDatabase())
+    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        signInViewController.authenticator = mockAuthenticator
         authenticationSheet.contentViewController = signInViewController
         window.beginSheet(authenticationSheet, completionHandler: nil)
     }
@@ -49,5 +52,6 @@ private extension AppDelegate {
         pleaseSignInLabel.stringValue = "oobe.onUserDidSignIn.welcome+displayName"
             .localized(comment: "Welcome, %@!",
                        arguments: [user.displayName ?? user.username])
+        window.endSheet(authenticationSheet)
     }
 }

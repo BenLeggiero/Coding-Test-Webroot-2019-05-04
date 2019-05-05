@@ -20,3 +20,24 @@ public enum FieldUpdate<Value> {
     /// - Parameter newValue: The new value for the field
     case performUpdate(newValue: Value)
 }
+
+
+
+public extension FieldUpdate {
+    static func ??(lhs: FieldUpdate<Value>, rhs: Value) -> Value {
+        return lhs.ifUpdating(use: { $0 }, elseUse: { rhs })
+    }
+    
+    
+    func ifUpdating<Transformed>(use transformer: (Value) -> Transformed,
+                                 elseUse backup: () -> Transformed) -> Transformed
+    {
+        switch self {
+        case .doNotUpdate:
+            return backup()
+            
+        case .performUpdate(let newValue):
+            return transformer(newValue)
+        }
+    }
+}

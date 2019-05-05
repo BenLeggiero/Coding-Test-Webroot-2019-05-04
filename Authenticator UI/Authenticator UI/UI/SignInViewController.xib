@@ -134,7 +134,7 @@ DQ
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bv8-YA-3rd">
+                <textField hidden="YES" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bv8-YA-3rd">
                     <rect key="frame" x="244" y="49" width="179" height="19"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Something went wrong" id="sq4-Z7-hMk">
                         <font key="font" metaFont="systemSemibold" size="16"/>

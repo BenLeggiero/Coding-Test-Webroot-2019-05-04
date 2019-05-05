@@ -53,6 +53,14 @@ public extension MultiFactorAuthenticationMechanism {
 
 
 
+extension MultiFactorAuthenticationMechanism: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(serviceId)
+    }
+}
+
+
+
 /// Models the result of the authentication request
 public enum MultiFactorAuthenticationResult {
     

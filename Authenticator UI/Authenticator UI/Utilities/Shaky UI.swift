@@ -15,9 +15,9 @@ internal extension Shakable {
     func shake() {
          // From https://stackoverflow.com/a/31755773/3939277
         
-        let numberOfShakes: Int = 8
+        let numberOfShakes: Int = 4
         let durationOfShake: Float = 0.5
-        let vigourOfShake: CGFloat = 0.05
+        let vigourOfShake: CGFloat = 0.02
         
         let shakeAnimation = CAKeyframeAnimation()
         
