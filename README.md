@@ -5,7 +5,7 @@ Ben Leggiero's coding test for Webroot, done 2019-05-04.
 
 ## Screen recordings of the coding process ##
 
-These are forthcoming.
+You can view unedited screen recordings of myself writing this, from before start to after finish, on [an album on Google Photos](https://photos.app.goo.gl/GaFaSS7hsnLnF7SD6).
 
 
 ## To test functionality ##
