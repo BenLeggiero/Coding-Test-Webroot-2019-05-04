@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var authenticationSheet: NSWindow!
+    @IBOutlet weak var pleaseSignInLabel: NSTextField!
     
     private lazy var signInViewController: SignInViewController = {
         let signInViewController = SignInViewController()
@@ -26,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         authenticationSheet.contentViewController = signInViewController
+        window.beginSheet(authenticationSheet, completionHandler: nil)
     }
     
     
@@ -44,6 +46,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 private extension AppDelegate {
     
     func userDidSignInSuccessfully(user: AuthenticatedUser) {
-        <#function body#>
+        pleaseSignInLabel.stringValue = "oobe.onUserDidSignIn.welcome+displayName"
+            .localized(comment: "Welcome, %@!",
+                       arguments: [user.displayName ?? user.username])
     }
 }

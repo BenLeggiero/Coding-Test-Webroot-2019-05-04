@@ -26,7 +26,20 @@ class SignInViewController: NSViewController {
     @IBOutlet private weak var signInButton: NSButton!
     
     
+    public var authenticator: Authenticator? = nil
     public var onUserDidSignInSuccessfully: OnUserDidSignInSuccessfully? = nil
+    
+    fileprivate var broadState: BroadState = .userIsEnteringInformation {
+        didSet {
+            updateBroadState()
+        }
+    }
+    
+    fileprivate var inlineTextAlert: String? = nil {
+        didSet {
+            updateInlineTextAlert()
+        }
+    }
     
 
     override func viewDidLoad() {
@@ -36,7 +49,7 @@ class SignInViewController: NSViewController {
         passwordField.delegate = self
         repeatPasswordField.delegate = self
         
-        updatePurpose(isNewUser: isNewUser)
+        updateUiApproach(isNewUser: isNewUser)
     }
     
     
@@ -52,7 +65,7 @@ private extension SignInViewController {
     
     @IBAction func didPressNewUserCheckbox(_ sender: NSButton) {
         let isChecked = sender.state == .on
-        updatePurpose(isNewUser: isChecked)
+        updateUiApproach(isNewUser: isChecked)
     }
     
     
@@ -67,13 +80,11 @@ private extension SignInViewController {
                 shakeWindow()
                 
             case .acceptable:
-                Authenticator.registerNewUser(name: username, password: password)
+                performRegistration()
             }
         }
         else {
-            Authenticator.authenticate(username: username, password: password) {
-                
-            }
+            performSignIn()
         }
     }
 }
@@ -111,12 +122,12 @@ private extension SignInViewController {
 
 
 
-// MARK: - Functionality
+// MARK: - UI behavior & introspection
 
 private extension SignInViewController {
     
     
-    func updatePurpose(isNewUser: Bool) {
+    func updateUiApproach(isNewUser: Bool) {
         let shouldHideNewUserSection = !isNewUser
         
         repeatPasswordField.isHidden = shouldHideNewUserSection
@@ -206,6 +217,157 @@ private extension SignInViewController {
                  .exceptional:
                 self = .acceptable
             }
+        }
+    }
+    
+    
+    
+    /// Describes the broad state of the UI
+    enum BroadState {
+        /// The user is currently entering information; all entering-information fields should be enabled appropriately
+        case userIsEnteringInformation
+        
+        /// The app is currently working in the background to authenticate the user; the user should not be allowed to
+        /// change information or double-start the process
+        case authenticatingInBackground
+    }
+}
+
+
+
+// MARK: - Alerting
+
+private extension SignInViewController {
+    
+    func alertUser(of userAlert: UserAlert) {
+        
+        inlineTextAlert = nil
+        
+        switch userAlert {
+        case .badAuthenticator:
+            alertUserUsingNsAlert(title: "dialog.badAuthenticator.title".localized(comment: "Something went wrong"),
+                                  bodyText: "dialog.badAuthenticator.body".localized(comment: "Could not communicate with server"),
+                                  style: .critical)
+            
+        case .noSuchUserFound:
+            alertUserUsingInlineText("message.inlineAlert.notYetRegistered".localized(comment: "You have not registered yet"))
+            
+        case .accountDeleted:
+            alertUserUsingInlineText("message.inlineAlert.accountDeleted".localized(comment: "Your account was deleted"))
+            
+        case .badPassword:
+            alertUserUsingInlineText("message.inlineAlert.badPassword".localized(comment: "That password is incorrect"))
+            
+        case .todo(component: .mfa):
+            alertUserUsingNsAlert(title: "dialog.unimplementedMfa.title".localized(comment: "Sorry, MFA is not yet supported"),
+                                  bodyText: "dialog.unimplementedMfa.body".localized(comment: "We couldn't sign you in because we don't yet support MFA"),
+                                  style: .critical)
+        }
+    }
+    
+    
+    private func alertUserUsingNsAlert(title: String,
+                                       bodyText: String,
+                                       style: NSAlert.Style) {
+        let alert = NSAlert()
+        alert.informativeText = title
+        alert.messageText = bodyText
+        alert.alertStyle = style
+        alert.present(on: self.view.window)
+    }
+    
+    
+    private func alertUserUsingInlineText(_ newAlertText: String) {
+        inlineTextAlert = newAlertText
+    }
+    
+    
+    
+    /// Generally describes of what we want to alert the user
+    enum UserAlert {
+        /// Tell the user that they couldn't be authenticated due to some system problem
+        case badAuthenticator
+        
+        /// Tell the user that they gave us the wrong password
+        case badPassword
+        
+        /// Tell the user that, though we tried to sign them in, it seems they're not in the system
+        case noSuchUserFound
+        
+        /// Tell the user that, though they were found in the system, their account was already deleted
+        case accountDeleted
+        
+        /// Tell the user that we have not implemented some required functionality
+        /// - Parameter component: The part of the app which we have not yet implemented
+        case todo(component: UnfinishedComponent)
+    }
+    
+    
+    
+    /// Some part of the app which we have not yet implemented
+    enum UnfinishedComponent {
+        /// Multi-Factor Authentication
+        case mfa
+    }
+}
+
+
+
+// MARK: - Functionality
+
+private extension SignInViewController {
+    
+    func performSignIn() {
+        withAuthenticator { authenticator in
+            authenticator.authenticate(username: username, password: password) { [weak self] authenticationResult in
+                switch authenticationResult {
+                case .authenticatedSuccessfully(let authenticatedUser):
+                    self?.onUserDidSignInSuccessfully(authenticatedUser)
+                    
+                case .noSuchUserFound:
+                    self?.alertUser(of: .noSuchUserFound)
+                    
+                case .userWasRemoved:
+                    self?.alertUser(of: .accountDeleted)
+                    
+                case .otherFactorRequired(let otherFactor, let onAuthenticationComplete):
+                    self?.alertUser(of: .todo(component: .mfa))
+                    
+                case .userCancelledAuthentication:
+                    self?.broadState = .userIsEnteringInformation
+                    
+                case .unexpectedFailure:
+                    <#code#>
+                }
+            }
+        }
+    }
+    
+    
+    func performRegistration() {
+        withAuthenticator { authenticator in
+            authenticator.registerNewUser(username: username, password: password) { [weak self] registrationResult in
+                switch registrationResult {
+                case .registeredSuccessfully(let authenticatedUser):
+                    self?.onUserDidSignInSuccessfully?(authenticatedUser)
+                    
+                case .userAlreadyRegistered:
+                    self?.performSignIn()
+                    
+                case .otherFailure:
+                    self?.alertUser(of: .badAuthenticator)
+                }
+            }
+        }
+    }
+    
+    
+    func withAuthenticator(do function: (Authenticator) -> Void) {
+        if let authenticator = self.authenticator {
+            function(authenticator)
+        }
+        else {
+            alertUserOfBadAuthenticator()
         }
     }
 }

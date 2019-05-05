@@ -19,6 +19,7 @@
 		A3A3E19C227E4E9E003689D2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E19A227E4E9E003689D2 /* SignInViewController.xib */; };
 		A3A3E1A5227E5583003689D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E1A4227E5583003689D2 /* Localizable.strings */; };
 		A3A3E1A7227E57BA003689D2 /* Shaky UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1A6227E57BA003689D2 /* Shaky UI.swift */; };
+		A3A3E1AD227E683D003689D2 /* Alert Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1AC227E683D003689D2 /* Alert Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		A3A3E19A227E4E9E003689D2 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		A3A3E1A4227E5583003689D2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A3A3E1A6227E57BA003689D2 /* Shaky UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shaky UI.swift"; sourceTree = "<group>"; };
+		A3A3E1AC227E683D003689D2 /* Alert Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert Utilities.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				A3A3E18E227E4418003689D2 /* Comparable Number Array Extensions.swift */,
 				A3A3E192227E4700003689D2 /* DescribableByVagueValue.swift */,
 				A3A3E1A6227E57BA003689D2 /* Shaky UI.swift */,
+				A3A3E1AC227E683D003689D2 /* Alert Utilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				A3A3E193227E4700003689D2 /* DescribableByVagueValue.swift in Sources */,
 				A3A3E15F227E3686003689D2 /* AppDelegate.swift in Sources */,
 				A3A3E1A7227E57BA003689D2 /* Shaky UI.swift in Sources */,
+				A3A3E1AD227E683D003689D2 /* Alert Utilities.swift in Sources */,
 				A3A3E18F227E4418003689D2 /* Comparable Number Array Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

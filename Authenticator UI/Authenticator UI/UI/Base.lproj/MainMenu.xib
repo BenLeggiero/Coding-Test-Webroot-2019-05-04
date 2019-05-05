@@ -15,6 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Authenticator_UI" customModuleProvider="target">
             <connections>
                 <outlet property="authenticationSheet" destination="NXL-Rs-5Mu" id="Zms-S2-nmA"/>
+                <outlet property="pleaseSignInLabel" destination="xcC-ha-Gu8" id="iMj-xz-ZAx"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>

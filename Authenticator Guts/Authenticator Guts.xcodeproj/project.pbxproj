@@ -14,9 +14,10 @@
 		A3A3E195227E4830003689D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E194227E4830003689D2 /* Localizable.strings */; };
 		A3A3E198227E4D1A003689D2 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E197227E4D1A003689D2 /* Localizer.swift */; };
 		A3A3E1A0227E50C8003689D2 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E19F227E50C8003689D2 /* Authenticator.swift */; };
-		A3A3E1A3227E53EC003689D2 /* MultiFactorAuthenticatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1A2227E53EC003689D2 /* MultiFactorAuthenticatorModel.swift */; };
-		A3A3E1A9227E5B74003689D2 /* AuthenticatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1A8227E5B74003689D2 /* AuthenticatedUser.swift */; };
-		A3A3E1AB227E5C29003689D2 /* AuthenticationDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1AA227E5C29003689D2 /* AuthenticationDatabase.swift */; };
+		A3A3E1A3227E53EC003689D2 /* MultiFactorAuthenticationMechanism.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1A2227E53EC003689D2 /* MultiFactorAuthenticationMechanism.swift */; };
+		A3A3E1A9227E5B74003689D2 /* User Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1A8227E5B74003689D2 /* User Models.swift */; };
+		A3A3E1AB227E5C29003689D2 /* UserRegistryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1AA227E5C29003689D2 /* UserRegistryDatabase.swift */; };
+		A3A3E1AF227E6E72003689D2 /* FieldUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E1AE227E6E72003689D2 /* FieldUpdate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,9 +41,10 @@
 		A3A3E194227E4830003689D2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A3A3E197227E4D1A003689D2 /* Localizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
 		A3A3E19F227E50C8003689D2 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
-		A3A3E1A2227E53EC003689D2 /* MultiFactorAuthenticatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFactorAuthenticatorModel.swift; sourceTree = "<group>"; };
-		A3A3E1A8227E5B74003689D2 /* AuthenticatedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedUser.swift; sourceTree = "<group>"; };
-		A3A3E1AA227E5C29003689D2 /* AuthenticationDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDatabase.swift; sourceTree = "<group>"; };
+		A3A3E1A2227E53EC003689D2 /* MultiFactorAuthenticationMechanism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFactorAuthenticationMechanism.swift; sourceTree = "<group>"; };
+		A3A3E1A8227E5B74003689D2 /* User Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User Models.swift"; sourceTree = "<group>"; };
+		A3A3E1AA227E5C29003689D2 /* UserRegistryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistryDatabase.swift; sourceTree = "<group>"; };
+		A3A3E1AE227E6E72003689D2 /* FieldUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,11 +87,11 @@
 		A3A3E13A227E3670003689D2 /* Authenticator Guts */ = {
 			isa = PBXGroup;
 			children = (
-				A3A3E196227E4D0C003689D2 /* Internal Utilities */,
+				A3A3E196227E4D0C003689D2 /* General Utilities */,
 				A3A3E19F227E50C8003689D2 /* Authenticator.swift */,
-				A3A3E1A8227E5B74003689D2 /* AuthenticatedUser.swift */,
-				A3A3E1AA227E5C29003689D2 /* AuthenticationDatabase.swift */,
-				A3A3E1A2227E53EC003689D2 /* MultiFactorAuthenticatorModel.swift */,
+				A3A3E1A8227E5B74003689D2 /* User Models.swift */,
+				A3A3E1B0227E6E77003689D2 /* Database */,
+				A3A3E1A2227E53EC003689D2 /* MultiFactorAuthenticationMechanism.swift */,
 				A3A3E188227E3B04003689D2 /* PasswordStrengthChecker.swift */,
 				A3A3E1A1227E5124003689D2 /* Resources */,
 				A3A3E13B227E3670003689D2 /* Authenticator_Guts.h */,
@@ -106,12 +108,12 @@
 			path = "Authenticator GutsTests";
 			sourceTree = "<group>";
 		};
-		A3A3E196227E4D0C003689D2 /* Internal Utilities */ = {
+		A3A3E196227E4D0C003689D2 /* General Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				A3A3E197227E4D1A003689D2 /* Localizer.swift */,
 			);
-			path = "Internal Utilities";
+			path = "General Utilities";
 			sourceTree = "<group>";
 		};
 		A3A3E1A1227E5124003689D2 /* Resources */ = {
@@ -121,6 +123,15 @@
 				A3A3E194227E4830003689D2 /* Localizable.strings */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		A3A3E1B0227E6E77003689D2 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				A3A3E1AA227E5C29003689D2 /* UserRegistryDatabase.swift */,
+				A3A3E1AE227E6E72003689D2 /* FieldUpdate.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,9 +244,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3A3E1A3227E53EC003689D2 /* MultiFactorAuthenticatorModel.swift in Sources */,
-				A3A3E1A9227E5B74003689D2 /* AuthenticatedUser.swift in Sources */,
-				A3A3E1AB227E5C29003689D2 /* AuthenticationDatabase.swift in Sources */,
+				A3A3E1A3227E53EC003689D2 /* MultiFactorAuthenticationMechanism.swift in Sources */,
+				A3A3E1A9227E5B74003689D2 /* User Models.swift in Sources */,
+				A3A3E1AF227E6E72003689D2 /* FieldUpdate.swift in Sources */,
+				A3A3E1AB227E5C29003689D2 /* UserRegistryDatabase.swift in Sources */,
 				A3A3E189227E3B04003689D2 /* PasswordStrengthChecker.swift in Sources */,
 				A3A3E198227E4D1A003689D2 /* Localizer.swift in Sources */,
 				A3A3E1A0227E50C8003689D2 /* Authenticator.swift in Sources */,
