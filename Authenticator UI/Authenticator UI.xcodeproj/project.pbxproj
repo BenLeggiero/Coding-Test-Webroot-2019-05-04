@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A34E8595227E8D010020AB3A /* MockUserRegistryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34E8594227E8D010020AB3A /* MockUserRegistryDatabase.swift */; };
+		A395B714227EAAA800537B92 /* Authenticator_Guts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A3E18B227E3B83003689D2 /* Authenticator_Guts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A3A3E15F227E3686003689D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A3E15E227E3686003689D2 /* AppDelegate.swift */; };
 		A3A3E161227E3686003689D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E160227E3686003689D2 /* Assets.xcassets */; };
 		A3A3E164227E3686003689D2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A3E162227E3686003689D2 /* MainMenu.xib */; };
@@ -39,6 +40,19 @@
 			remoteInfo = "Authenticator UI";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A395B713227EAA9E00537B92 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A395B714227EAAA800537B92 /* Authenticator_Guts.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A34E8594227E8D010020AB3A /* MockUserRegistryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRegistryDatabase.swift; sourceTree = "<group>"; };
@@ -199,6 +213,7 @@
 				A3A3E157227E3686003689D2 /* Sources */,
 				A3A3E158227E3686003689D2 /* Frameworks */,
 				A3A3E159227E3686003689D2 /* Resources */,
+				A395B713227EAA9E00537B92 /* CopyFiles */,
 			);
 			buildRules = (
 			);
