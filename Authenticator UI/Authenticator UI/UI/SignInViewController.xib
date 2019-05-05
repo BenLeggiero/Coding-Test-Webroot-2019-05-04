@@ -7,6 +7,17 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SignInViewController" customModule="Authenticator_UI" customModuleProvider="target">
             <connections>
+                <outlet property="inlineAlertIcon" destination="G0s-05-Wip" id="9If-gy-xUJ"/>
+                <outlet property="inlineAlertLabel" destination="bv8-YA-3rd" id="fxT-EL-OMb"/>
+                <outlet property="newUserCheckBox" destination="AE1-yL-p82" id="N2q-05-x0c"/>
+                <outlet property="passwordField" destination="3pq-BJ-VpQ" id="gxq-uT-TI5"/>
+                <outlet property="passwordStrengthIndicatorLabel" destination="PiS-Po-1QF" id="cMr-rX-Wvx"/>
+                <outlet property="passwordStrengthLabel" destination="BOs-L3-bnb" id="eVf-02-bfe"/>
+                <outlet property="passwordStrengthMeter" destination="5Or-oQ-4EN" id="MRw-Tc-cfH"/>
+                <outlet property="repeatPasswordField" destination="CkP-mv-LC2" id="E7M-Pe-lAM"/>
+                <outlet property="repeatPasswordLabel" destination="sai-ao-YkT" id="uVP-cm-y3z"/>
+                <outlet property="signInButton" destination="V61-dM-LZo" id="bWr-ns-3Oi"/>
+                <outlet property="usernameField" destination="5sM-wu-fuS" id="4Ce-sO-LbP"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -98,6 +109,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="didPressNewUserCheckbox:" target="-2" id="m14-70-cmH"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V61-dM-LZo">
                     <rect key="frame" x="345" y="13" width="82" height="32"/>
@@ -108,6 +122,9 @@
 DQ
 </string>
                     </buttonCell>
+                    <connections>
+                        <action selector="didPressSignInButton:" target="-2" id="yaL-1A-20s"/>
+                    </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XG1-ws-7ar">
                     <rect key="frame" x="152" y="249" width="137" height="29"/>

@@ -52,3 +52,6 @@
 
 // The text we display to the user alongside other controls, when they tried to sign in using an incorrect password
 "message.inlineAlert.badPassword" = "That password is incorrect";
+
+// The text we display to the user alongside other controls, when they tried to register but their passwords don't match
+"message.inlineAlert.passwordMismatch" = "Those passwords must be the same";

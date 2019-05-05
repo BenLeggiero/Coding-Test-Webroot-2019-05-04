@@ -56,8 +56,10 @@ public extension MultiFactorAuthenticationMechanism {
 /// Models the result of the authentication request
 public enum MultiFactorAuthenticationResult {
     
-    /// The user has successfully authenticated theirself
-    case authenticated
+    /// The user has successfully authenticated theirself. Passing this back continues the authentication process and
+    /// will re-call some callbacks.
+    /// - Parameter token: The token which was the result of the user authenticating theirself
+    case authenticated(token: String)
     
     /// The user explicitly rejected the MFA request
     case userRejectedRequest

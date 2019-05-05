@@ -22,8 +22,19 @@ class SignInViewController: NSViewController {
     @IBOutlet private weak var passwordStrengthMeter: NSProgressIndicator!
     @IBOutlet private weak var passwordStrengthIndicatorLabel: NSTextField!
     
+    @IBOutlet private weak var inlineAlertIcon: NSImageView!
+    @IBOutlet private weak var inlineAlertLabel: NSTextField!
+    
     @IBOutlet private weak var newUserCheckBox: NSButton!
     @IBOutlet private weak var signInButton: NSButton!
+    
+    fileprivate lazy var allUserInputControls: [NSControl] = [
+        usernameField,
+        passwordField,
+        repeatPasswordField,
+        newUserCheckBox,
+        signInButton
+    ]
     
     
     public var authenticator: Authenticator? = nil
@@ -35,7 +46,7 @@ class SignInViewController: NSViewController {
         }
     }
     
-    fileprivate var inlineTextAlert: String? = nil {
+    fileprivate var inlineTextAlertText: String? = nil {
         didSet {
             updateInlineTextAlert()
         }
@@ -74,9 +85,11 @@ private extension SignInViewController {
             let passwordAcceptability = performBasicPasswordChecks()
             switch passwordAcceptability {
             case .badPassword:
+                alertUser(of: .badPassword)
                 shakeWindow()
                 
             case .passwordsDoNotMatch:
+                alertUser(of: .passwordMismatch)
                 shakeWindow()
                 
             case .acceptable:
@@ -137,9 +150,9 @@ private extension SignInViewController {
         passwordStrengthLabel.isHidden = shouldHideNewUserSection
         passwordStrengthIndicatorLabel.isHidden = shouldHideNewUserSection
         
-        signInButton.stringValue = isNewUser
-            ? "button.authentication.signIn".localized(comment: "Sign In")
-            : "button.authentication.register".localized(comment: "Register")
+        signInButton.title = isNewUser
+            ? "button.authentication.register".localized(comment: "Register")
+            : "button.authentication.signIn".localized(comment: "Sign In")
     }
     
     
@@ -158,6 +171,9 @@ private extension SignInViewController {
     
     
     func checkPasswordLocally() {
+        
+        inlineTextAlertText = nil
+        
         let strength = passwordStrength()
         let strengthVagueValue: VagueValue = {
             switch strength {
@@ -189,6 +205,24 @@ private extension SignInViewController {
         }
         else {
             self.view.shake()
+        }
+    }
+    
+    
+    func updateBroadState() {
+        
+        let shouldAllowBroadUserInput: Bool
+        
+        switch broadState {
+        case .userIsEnteringInformation:
+            shouldAllowBroadUserInput = true
+            
+        case .authenticatingInBackground:
+            shouldAllowBroadUserInput = false
+        }
+        
+        allUserInputControls.forEach { control in
+            control.isEnabled = shouldAllowBroadUserInput
         }
     }
     
@@ -241,7 +275,7 @@ private extension SignInViewController {
     
     func alertUser(of userAlert: UserAlert) {
         
-        inlineTextAlert = nil
+        inlineTextAlertText = nil
         
         switch userAlert {
         case .badAuthenticator:
@@ -257,6 +291,9 @@ private extension SignInViewController {
             
         case .badPassword:
             alertUserUsingInlineText("message.inlineAlert.badPassword".localized(comment: "That password is incorrect"))
+            
+        case .passwordMismatch:
+            alertUserUsingInlineText("message.inlineAlert.passwordMismatch".localized(comment: "Those passwords must be the same"))
             
         case .todo(component: .mfa):
             alertUserUsingNsAlert(title: "dialog.unimplementedMfa.title".localized(comment: "Sorry, MFA is not yet supported"),
@@ -278,7 +315,23 @@ private extension SignInViewController {
     
     
     private func alertUserUsingInlineText(_ newAlertText: String) {
-        inlineTextAlert = newAlertText
+        inlineTextAlertText = newAlertText
+    }
+    
+    
+    func updateInlineTextAlert() {
+        if let inlineTextAlertText = inlineTextAlertText {
+            inlineAlertLabel.stringValue = inlineTextAlertText
+            inlineAlertIcon.isHidden = false
+            inlineAlertLabel.isHidden = false
+            
+            inlineAlertLabel.shake()
+            inlineAlertIcon.shake()
+        }
+        else {
+            inlineAlertIcon.isHidden = true
+            inlineAlertLabel.isHidden = true
+        }
     }
     
     
@@ -290,6 +343,9 @@ private extension SignInViewController {
         
         /// Tell the user that they gave us the wrong password
         case badPassword
+        
+        /// Tell the user that their repeated passwords aren't the same
+        case passwordMismatch
         
         /// Tell the user that, though we tried to sign them in, it seems they're not in the system
         case noSuchUserFound
@@ -322,7 +378,7 @@ private extension SignInViewController {
             authenticator.authenticate(username: username, password: password) { [weak self] authenticationResult in
                 switch authenticationResult {
                 case .authenticatedSuccessfully(let authenticatedUser):
-                    self?.onUserDidSignInSuccessfully(authenticatedUser)
+                    self?.onUserDidSignInSuccessfully?(authenticatedUser)
                     
                 case .noSuchUserFound:
                     self?.alertUser(of: .noSuchUserFound)
@@ -330,14 +386,15 @@ private extension SignInViewController {
                 case .userWasRemoved:
                     self?.alertUser(of: .accountDeleted)
                     
-                case .otherFactorRequired(let otherFactor, let onAuthenticationComplete):
+                case .otherFactorRequired(otherFactor: _, let onAuthenticationComplete):
                     self?.alertUser(of: .todo(component: .mfa))
+                    onAuthenticationComplete(.userRejectedRequest)
                     
                 case .userCancelledAuthentication:
                     self?.broadState = .userIsEnteringInformation
                     
                 case .unexpectedFailure:
-                    <#code#>
+                    self?.alertUser(of: .badAuthenticator)
                 }
             }
         }
@@ -367,7 +424,7 @@ private extension SignInViewController {
             function(authenticator)
         }
         else {
-            alertUserOfBadAuthenticator()
+            alertUser(of: .badAuthenticator)
         }
     }
 }

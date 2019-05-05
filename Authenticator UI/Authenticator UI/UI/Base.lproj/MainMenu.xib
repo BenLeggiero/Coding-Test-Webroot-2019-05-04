@@ -689,20 +689,9 @@
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
-            </view>
-            <point key="canvasLocation" x="140" y="548"/>
-        </window>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="NXL-Rs-5Mu" userLabel="Authentication Sheet">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
-            <view key="contentView" id="Mwe-cd-dSx">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xcC-ha-Gu8">
-                        <rect key="frame" x="165" y="121" width="150" height="29"/>
+                        <rect key="frame" x="165" y="166" width="150" height="29"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Please sign in" id="wLk-la-lKU">
                             <font key="font" metaFont="systemMedium" size="24"/>
                             <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -711,9 +700,24 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="xcC-ha-Gu8" firstAttribute="centerX" secondItem="Mwe-cd-dSx" secondAttribute="centerX" id="5tj-ye-ZXd"/>
-                    <constraint firstItem="xcC-ha-Gu8" firstAttribute="centerY" secondItem="Mwe-cd-dSx" secondAttribute="centerY" id="rZd-Vy-3dF"/>
+                    <constraint firstItem="xcC-ha-Gu8" firstAttribute="centerY" secondItem="EiT-Mj-1SZ" secondAttribute="centerY" id="3sy-YY-W0x"/>
+                    <constraint firstItem="xcC-ha-Gu8" firstAttribute="centerX" secondItem="EiT-Mj-1SZ" secondAttribute="centerX" id="ETU-SS-9mT"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xcC-ha-Gu8" secondAttribute="bottom" constant="100" id="FeR-NP-tmm"/>
+                    <constraint firstItem="xcC-ha-Gu8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="100" id="Fmt-B5-a0V"/>
+                    <constraint firstItem="xcC-ha-Gu8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="100" id="oAb-4c-aEv"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xcC-ha-Gu8" secondAttribute="trailing" constant="100" id="zT4-TR-QWu"/>
                 </constraints>
+            </view>
+            <point key="canvasLocation" x="140" y="548"/>
+        </window>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NXL-Rs-5Mu" userLabel="Authentication Sheet">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="Mwe-cd-dSx">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
             </view>
             <point key="canvasLocation" x="140" y="985"/>
         </window>
