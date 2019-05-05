@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  Authenticator UI
+
+  Created by Ben Leggiero on 5/4/19.
+  Copyright © 2019 Ben Leggiero. All rights reserved.
+*/
+
+
+
+// MARK: - Buttons
+
+// The text shown on the button which the user presses when they want to sign in with an existing account
+"button.authentication.signIn" = "Sign In";
+
+// The text shown on the button which the user presses when they want to register a new account
+"button.authentication.register" = "Register";
+
+
+
+// MARK: - Dialogs
+
+// The title of the dialog which tells the user that we could not talk to the authentication service
+"dialog.badAuthenticator.title" = "Something went wrong";
+// The body text of the dialog which tells the user that we could not talk to the authentication service
+"dialog.badAuthenticator.body" = "We could not reach the server. Are you online?";
+
+
+// The title of the dialog which tells the user that we have not yet implemented MFA
+"dialog.unimplementedMfa.title" = "Sorry, MFA is not yet supported";
+
+// The body text of the dialog which tells the user that we have not yet implemented MFA
+"dialog.unimplementedMfa.body" = "We couldn't sign you in because your account requires multi-factor authentication, but we don't yet support that";
+
+
+
+// MARK: - OOBE
+
+// The text to show the user immediately after they successfully signed in
+// - Parameter displayName: The user's display name, or username if they have none
+"oobe.onUserDidSignIn.welcome+displayName" = "Welcome, %@!";
+
+
+
+// MARK: - Misc. Messages
+
+// The text we display to the user alongside other controls, when they tried to sign in before registering
+"message.inlineAlert.notYetRegistered" = "You have not registered yet";
+
+// The text we display to the user alongside other controls, when they tried to sign in after deleting their account
+"message.inlineAlert.accountDeleted" = "Your account was deleted";
+
+// The text we display to the user alongside other controls, when they tried to register by using a weak password
+"message.inlineAlert.passwordTooWeak" = "That password is not strong enough";
+
+// The text we display to the user alongside other controls, when they tried to sign in using an incorrect password
+"message.inlineAlert.badPassword" = "That password is incorrect";
+
+// The text we display to the user alongside other controls, when they tried to register but their passwords don't match
+"message.inlineAlert.passwordMismatch" = "Those passwords must be the same";

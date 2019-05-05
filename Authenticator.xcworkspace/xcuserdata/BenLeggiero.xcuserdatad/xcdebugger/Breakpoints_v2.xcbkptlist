@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Authenticator UI/Authenticator UI/UI/SignInViewController.swift"
+            timestampString = "578726077.736516"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "performSignIn()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Authenticator_Guts.Authenticator) -&gt; () in Authenticator_UI.SignInViewController.(performSignIn in _9B5AA6011C4865E286CCD737AD0C94E6)() -&gt; ()"
+                  moduleName = "Authenticator UI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BenLeggiero/Projects/From%20Me/Software/Coding%20Tests/WebRoot/2019-05-04/Authenticator%20UI/Authenticator%20UI/UI/SignInViewController.swift"
+                  timestampString = "578725761.000214"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "375"
+                  endingLineNumber = "375"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Authenticator_Guts.Authenticator.AuthenticationResult) -&gt; () in closure #1 (Authenticator_Guts.Authenticator) -&gt; () in Authenticator_UI.SignInViewController.(performSignIn in _9B5AA6011C4865E286CCD737AD0C94E6)() -&gt; ()"
+                  moduleName = "Authenticator UI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BenLeggiero/Projects/From%20Me/Software/Coding%20Tests/WebRoot/2019-05-04/Authenticator%20UI/Authenticator%20UI/UI/SignInViewController.swift"
+                  timestampString = "578725761.002069"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "375"
+                  endingLineNumber = "375"
+                  offsetFromSymbolStart = "113">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
